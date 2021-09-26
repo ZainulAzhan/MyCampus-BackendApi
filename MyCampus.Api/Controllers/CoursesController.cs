@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyCampus.Service.Dtos.Academics;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace MyCampus.Api.Controllers
 {
+    [Authorize]
     public class CoursesController : MyCampusControllerBase
     {
         private readonly IMediator _mediator;

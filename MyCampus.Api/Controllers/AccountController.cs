@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyCampus.Service.Dtos.Account;
+using MyCampus.Service.Handlers.Accounts;
 using MyCampus.Service.Handlers.PersonRoles;
 using System;
 using System.Collections.Generic;
@@ -18,11 +20,18 @@ namespace MyCampus.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterUserCommand command)
         {
             await _mediator.Send(command);
             return Ok();
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<LoginOutputDto>> Login(LoginCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
     }
 }
